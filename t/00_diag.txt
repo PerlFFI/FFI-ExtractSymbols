@@ -1,3 +1,4 @@
+Exporter
 FFI::CheckLib
 FFI::Platypus
 File::Which
