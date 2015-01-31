@@ -1,2 +1,6 @@
 /FFI-ExtractSymbols-*
 /.build
+*.o
+*.so
+*.dylib
+*.bundle

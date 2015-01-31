@@ -1,0 +1,111 @@
+package My::ModuleBuild;
+
+use strict;
+use warnings;
+use File::Which qw( which );
+use FFI::CheckLib qw( find_lib );
+use base qw( Module::Build::FFI );
+
+sub new
+{
+  my($class, %args) = @_;
+  my $self = $class->SUPER::new(%args);
+ 
+  my $exe = {};
+  foreach my $name (qw( nm objdump dumpbin readelf ))
+  {
+    $exe->{$name} = which($name);
+  }
+  
+  $self->config_data( exe => $exe );
+  
+  if($^O eq 'cygwin')
+  {
+    print STDERR "platform not supported.\n";
+    print STDERR "pull requests to fix this would be highly appreicated.\n";
+    exit;
+  }
+  elsif($^O eq 'MSWin32')
+  {
+    print STDERR "platform not supported.\n";
+    print STDERR "pull requests to fix this would be highly appreicated.\n";
+    exit;
+  }
+  else
+  {
+    unless(defined $exe->{nm})
+    {
+      print STDERR "nm is required on this platform.\n";
+      exit;
+    }
+    if($^O eq 'openbsd')
+    {
+      print STDERR "platform not supported.\n";
+      print STDERR "pull requests to fix this would be highly appreicated.\n";
+      exit;
+    }
+    else
+    {
+      # we assume that everyone else is going to support 
+      # nm -g -P foo.so
+      # although I have no way of testing AIX, HP-UX
+      $self->config_data( 'posix_nm' => 1 );
+    }
+  }
+  
+  $self;
+}
+
+sub ACTION_probe_libtest
+{
+  my($self) = shift;
+  
+  if($self->config_data('posix_nm'))
+  {
+
+    $self->depends_on('libtest');
+    my $lib = find_lib lib => 'test', symbol => 'my_function', libpath => 'libtest';
+    die "unable to find libtest!" unless defined $lib;
+    
+    my $nm = $self->config_data('exe')->{nm};
+    
+    my @lines = `$nm -g -P $lib`;
+
+    my $function = '';
+    my $variable = '';
+
+    foreach my $line (@lines)
+    {
+      if($line =~ /^(_?)my_function ([A-Za-z])/)
+      {
+        $self->config_data( function_prefix => $1 );
+        $self->config_data( function_code   => $2 );
+        $function = 1;
+      }
+      if($line =~ /^(_?)my_variable ([A-Za-z])/)
+      {
+        $self->config_data( data_prefix => $1 );
+        $self->config_data( data_code   => $2 );
+        $variable = 1;
+      }
+    }
+
+    unless($function || $variable)
+    {
+      print STDERR "unable to find my_function from nm output\n" unless $function;
+      print STDERR "unable to find my_variable from nm output\n" unless $variable;
+      print STDERR "[out]\n";
+      print STDERR $_ for @lines;
+      die "missing some symbols in nm output scan";
+    }
+  }
+}
+
+sub ACTION_build
+{
+  my $self = shift;
+  $self->depends_on('probe_libtest');
+  $self->SUPER::ACTION_build(@_);
+}
+
+1;
