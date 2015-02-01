@@ -27,13 +27,7 @@ sub new
   
   $self->config_data( exe => $exe );
   
-  if($^O eq 'cygwin')
-  {
-    print STDERR "platform not supported.\n";
-    print STDERR "pull requests to fix this would be highly appreicated.\n";
-    exit;
-  }
-  elsif($^O eq 'MSWin32')
+  if($^O =~ /^(cygwin|MSWin32)$/)
   {
     print STDERR "platform not supported.\n";
     print STDERR "pull requests to fix this would be highly appreicated.\n";
