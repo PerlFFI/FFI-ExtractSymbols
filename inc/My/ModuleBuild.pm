@@ -29,9 +29,12 @@ sub new
   
   if($^O =~ /^(cygwin|MSWin32)$/)
   {
-    print STDERR "platform not supported.\n";
-    print STDERR "pull requests to fix this would be highly appreicated.\n";
-    exit;
+    unless(defined $exe->{dumpbin})
+    {
+      print STDERR "dumpbin is required on this platform.\n";
+      exit;
+    }
+    $self->config_data( 'ms_windows' => 1 );
   }
   else
   {

@@ -21,16 +21,25 @@ extract_symbols($lib,
   code => sub {
     note "code:   $_[0] = $_[1]";
     push @code, $_[0]
-      if $_[0] =~ /my_function/;
+      if $_[0] =~ /my_(function|variable)/;
   },
   data => sub {
     note "data:   $_[0] = $_[1]";
     push @data, $_[0]
-      if $_[0] =~ /my_variable/;
+      if $_[0] =~ /my_(function|variable)/;
   },
 );
 
-is_deeply \@code, ['my_function'], "\\\@code = ['my_function']";
-is_deeply \@data, ['my_variable'], "\\\@data = ['my_variable']";
-is_deeply [sort @export], ['my_function','my_variable'], "\\\@data = ['my_function', 'my_data']";
+if($FFI::ExtractSymbols::mode eq 'mixed')
+{
+  is_deeply \@code, ['my_function','my_variable'], "\\\@code = ['my_function','my_variable']";
+  is_deeply \@data, [], "\\\@data = []";
+  is_deeply [sort @export], ['my_function','my_variable'], "\\\@data = ['my_function', 'my_data']";
+}
+else
+{
+  is_deeply \@code, ['my_function'], "\\\@code = ['my_function']";
+  is_deeply \@data, ['my_variable'], "\\\@data = ['my_variable']";
+  is_deeply [sort @export], ['my_function','my_variable'], "\\\@data = ['my_function', 'my_data']";
+}
 

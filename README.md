@@ -66,7 +66,9 @@ such as `c++filt` will require this version as input.  Example:
 This module _may_ work on static libraries and object files for some 
 platforms, but that usage is unsupported and may not be portable.
 
-Not all platforms support retrieving symbols from the data section.
+On windows, depending on the implementation available, this module may
+not differentiate between code and data symbols.  In that case the
+export and code callbacks will be called for both.
 
 On many platforms extra symbols get lumped into DLLs and shared object 
 files so you should account for and ignore getting unexpected symbols 

@@ -6,7 +6,7 @@ use File::Which qw( which );
 use constant _function_code => 'T';
 use constant _data_code     => 'B';
 
-# ABSTRACT: Posix nm implementation for FFI::ExtractSymbols
+# ABSTRACT: OpenBSD nm implementation for FFI::ExtractSymbols
 # VERSION
 
 =head1 DESCRIPTION
