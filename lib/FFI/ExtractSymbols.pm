@@ -13,8 +13,20 @@ our @EXPORT = qw( extract_symbols );
 =head1 SYNOPSIS
 
  use FFI::ExtractSymbols;
+ use FFI::CheckLib;
+ 
+ my $libpath = find_lib( lib => 'foo' );
+ 
+ extract_symbols($libpath,
+   code => sub {
+     print "found a function called $_[0]\n";
+   },
+ );
 
 =head1 DESCRIPTION
+
+This module extracts the symbol names from a DLL or shared object.  The 
+method used depends on the platform.
 
 =head1 FUNCTIONS
 

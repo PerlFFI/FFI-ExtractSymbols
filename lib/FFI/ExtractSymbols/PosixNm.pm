@@ -2,6 +2,7 @@ package FFI::ExtractSymbols::PosixNm;
 
 use strict;
 use warnings;
+use File::Which qw( which );
 use FFI::ExtractSymbols::ConfigData;
 use constant _function_prefix => do {
   my $prefix = FFI::ExtractSymbols::ConfigData->config('function_prefix');
@@ -35,6 +36,10 @@ instead.
 =back
 
 =cut
+
+my $nm = which('nm');
+$nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
+  unless defined $nm;
 
 if(my $prefix = FFI::ExtractSymbols::ConfigData->config('function_prefix'))
 {

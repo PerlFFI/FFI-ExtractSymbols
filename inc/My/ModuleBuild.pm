@@ -15,6 +15,11 @@ sub new
   foreach my $name (qw( nm objdump dumpbin readelf ))
   {
     $exe->{$name} = which($name);
+    unless(defined $exe->{$name})
+    {
+      my $try = $ENV{"FFI_EXTRACTSYMBOLS_" . uc $name};
+      $exe->{$name} = $try if -e $try;
+    }
   }
   
   $self->config_data( exe => $exe );
