@@ -25,6 +25,8 @@ instead.
 
 =cut
 
+return if FFI::ExtractSymbols->can('extract_symbols');
+
 my $dumpbin = which('dumpbin');
 $dumpbin ||= FFI::ExtractSymbols::ConfigData->config('exe')->{dumpbin};
 

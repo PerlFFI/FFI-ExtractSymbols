@@ -26,6 +26,8 @@ instead.
 
 =cut
 
+return if FFI::ExtractSymbols->can('extract_symbols');
+
 my $nm = which('nm');
 $nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
   unless defined $nm;
