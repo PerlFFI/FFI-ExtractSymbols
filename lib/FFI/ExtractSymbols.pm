@@ -29,14 +29,12 @@ our @EXPORT = qw( extract_symbols );
 Extracts symbols from the dynamic library (DLL on Windows, shared 
 library most other places) from the library and calls the given 
 callbacks. Each callback is called once for each symbol that matches 
-that type.  Each callback gets two arguments.  The first is the
-symbol name in a form that can be passed into 
-L<FFI::Platypus#find_symbol>,
-L<FFI::Platypus#function> or
-L<FFI::Platypus#attach>.  The second is the exact symbol name as
-it was extracted from the DLL or shared library.  On some platforms
-this will be prefixed by an underscore.  Some tools, such as
-C<c++filt> will require this version as input.  Example:
+that type.  Each callback gets two arguments.  The first is the symbol 
+name in a form that can be passed into L<FFI::Platypus#find_symbol>, 
+L<FFI::Platypus#function> or L<FFI::Platypus#attach>.  The second is the 
+exact symbol name as it was extracted from the DLL or shared library.  
+On some platforms this will be prefixed by an underscore.  Some tools, 
+such as C<c++filt> will require this version as input.  Example:
 
  extract_symbols( 'libfoo.so',
    export => sub {
@@ -65,15 +63,30 @@ All symbols in the data section of the DLL or shared object.
 
 =head1 CAVEATS
 
-This module I<may> work on static libraries and object files for
-some platforms, but that usage is unsupported and may not be
-portable.
+This module I<may> work on static libraries and object files for some 
+platforms, but that usage is unsupported and may not be portable.
+
+Not all platforms support retrieving symbols from the data section.
+
+On many platforms extra symbols get lumped into DLLs and shared object 
+files so you should account for and ignore getting unexpected symbols 
+that you probably don't care about.
 
 =head1 SEE ALSO
 
 =over 4
 
 =item L<FFI::Platypus>
+
+Write Perl bindings to non-Perl libraries without C or XS
+
+=item L<Parse::nm>
+
+This module can parse the symbol names out of shared object files on 
+platforms where C<nm> works on those types of files.
+
+It does not work for Windows DLL files.  It also depends on 
+L<Regexp::Assemble> which appears to be unmaintained.
 
 =back
 
