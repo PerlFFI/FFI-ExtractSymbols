@@ -6,9 +6,9 @@ use FFI::CheckLib qw( find_lib );
 use FFI::ExtractSymbols::ConfigData;
 
 plan skip_all => 'requires posix_nm mode with no underscore prefix'
-  if     FFI::ExtractSymbols::ConfigData->config('posix_nm')
-  &&     FFI::ExtractSymbols::ConfigData->config('function_prefix') eq '_'
-  &&     FFI::ExtractSymbols::ConfigData->config('data_prefix') eq '_';
+  unless FFI::ExtractSymbols::ConfigData->config('posix_nm')
+  &&     FFI::ExtractSymbols::ConfigData->config('function_prefix') eq ''
+  &&     FFI::ExtractSymbols::ConfigData->config('data_prefix') eq '';
 
 plan tests => 3;
 
