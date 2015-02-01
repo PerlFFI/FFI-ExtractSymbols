@@ -78,6 +78,10 @@ that you probably don't care about.
 
     Write Perl bindings to non-Perl libraries without C or XS
 
+- [FFI::CheckLib](https://metacpan.org/pod/FFI::CheckLib)
+
+    Module for checking for the availability of dynamic libraries.
+
 - [Parse::nm](https://metacpan.org/pod/Parse::nm)
 
     This module can parse the symbol names out of shared object files on 

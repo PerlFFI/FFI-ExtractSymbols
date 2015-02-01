@@ -92,6 +92,10 @@ that you probably don't care about.
 
 Write Perl bindings to non-Perl libraries without C or XS
 
+=item L<FFI::CheckLib>
+
+Module for checking for the availability of dynamic libraries.
+
 =item L<Parse::nm>
 
 This module can parse the symbol names out of shared object files on 

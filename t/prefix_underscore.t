@@ -40,4 +40,4 @@ extract_symbols($lib,
 
 is_deeply \@code, ['_my_function'], "\\\@code = ['_my_function']";
 is_deeply \@data, ['_my_variable'], "\\\@data = ['_my_variable']";
-is_deeply [sort @export], ['_my_function','_my_variable'], "\\\@data = ['my_function', 'my_data']";
+is_deeply [sort @export], ['_my_function','_my_variable'], "\\\@data = ['_my_function', '_my_data']";
