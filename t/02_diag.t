@@ -7,9 +7,11 @@ diag '';
 diag '';
 diag '';
 
-foreach my $key (sort qw( posix_nm function_prefix function_code data_prefix data_code ))
+foreach my $key (sort qw( openbsd_nm posix_nm function_prefix function_code data_prefix data_code ))
 {
-  diag sprintf "%-15s = %s", $key, FFI::ExtractSymbols::ConfigData->config($key);
+  my $value = FFI::ExtractSymbols::ConfigData->config($key);
+  $value = '~' unless defined $value;
+  diag sprintf "%-15s = %s", $key, $value;
 }
 
 diag '';

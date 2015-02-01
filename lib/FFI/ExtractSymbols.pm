@@ -112,5 +112,13 @@ if(FFI::ExtractSymbols::ConfigData->config('posix_nm'))
 {
   require FFI::ExtractSymbols::PosixNm;
 }
+elsif(FFI::ExtractSymbols::ConfigData->config('openbsd_nm'))
+{
+  require FFI::ExtractSymbols::OpenBSD;
+}
+else
+{
+  die "no appropriate implementation";
+}
 
 1;

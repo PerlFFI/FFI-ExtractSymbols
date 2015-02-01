@@ -9,6 +9,9 @@ use base qw( Module::Build::FFI );
 sub new
 {
   my($class, %args) = @_;
+  
+  $args{ffi_libtest_optional} = 0;
+  
   my $self = $class->SUPER::new(%args);
  
   my $exe = {};
@@ -45,9 +48,7 @@ sub new
     }
     if($^O eq 'openbsd')
     {
-      print STDERR "platform not supported.\n";
-      print STDERR "pull requests to fix this would be highly appreicated.\n";
-      exit;
+      $self->config_data( 'openbsd_nm' => 1 );
     }
     else
     {

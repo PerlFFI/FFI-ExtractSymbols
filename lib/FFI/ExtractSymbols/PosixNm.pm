@@ -4,16 +4,8 @@ use strict;
 use warnings;
 use File::Which qw( which );
 use FFI::ExtractSymbols::ConfigData;
-use constant _function_prefix => do {
-  my $prefix = FFI::ExtractSymbols::ConfigData->config('function_prefix');
-  qr{^$prefix};
-};
 use constant _function_code =>
   FFI::ExtractSymbols::ConfigData->config('function_code');
-use constant _data_prefix => do {
-  my $prefix = FFI::ExtractSymbols::ConfigData->config('data_prefix');
-  qr{^$prefix};
-};
 use constant _data_code =>
   FFI::ExtractSymbols::ConfigData->config('data_code');
 
@@ -71,7 +63,7 @@ else
   
   $callbacks{$_} ||= sub {} for qw( export code data );
   
-  foreach my $line (`nm -g -P $libpath`)
+  foreach my $line (`$nm -g -P $libpath`)
   {
     next if $line =~ /^\s/;
     my($symbol, $type) = split /\s+/, $line;
