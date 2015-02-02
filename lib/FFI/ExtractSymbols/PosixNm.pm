@@ -29,7 +29,7 @@ instead.
 
 =cut
 
-return if FFI::ExtractSymbols->can('extract_symbols');
+return 1 if FFI::ExtractSymbols->can('extract_symbols');
 
 my $nm = which('nm');
 $nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
