@@ -69,7 +69,7 @@ else
   {
     next if $line =~ /^\s/;
     my($symbol, $type) = split /\s+/, $line;
-    if($type eq _function_code)
+    if($type eq _function_code || $type eq 'W')
     {
       $callbacks{export}->(_remove_code_prefix($symbol), $symbol);
       $callbacks{code}->  (_remove_code_prefix($symbol), $symbol);

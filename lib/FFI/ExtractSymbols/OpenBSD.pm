@@ -42,7 +42,7 @@ $nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
   {
     next if $line =~ /^\s/;
     my(undef, $type, $symbol) = split /\s+/, $line;
-    if($type eq _function_code)
+    if($type eq _function_code || $type eq 'W')
     {
       $callbacks{export}->($symbol, $symbol);
       $callbacks{code}->  ($symbol, $symbol);

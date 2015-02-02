@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - When using nm mode, accept W in addition to T for code symbols
 
 0.02      2015-02-01 23:56:27 -0500
   - First release to CPAN
