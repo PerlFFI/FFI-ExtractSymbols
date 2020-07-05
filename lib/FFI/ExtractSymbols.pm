@@ -2,9 +2,10 @@ package FFI::ExtractSymbols;
 
 use strict;
 use warnings;
-use FFI::ExtractSymbols::ConfigData;
+use File::ShareDir::Dist ();
 use base qw( Exporter );
 
+my $config = File::ShareDir::Dist::dist_config('FFI-ExtractSymbols');
 our @EXPORT = qw( extract_symbols );
 
 # ABSTRACT: Extract symbol names from a shared object or DLL
@@ -112,15 +113,15 @@ L<Regexp::Assemble> which appears to be unmaintained.
 
 $FFI::ExtractSymbols::mode = '';
 
-if(FFI::ExtractSymbols::ConfigData->config('posix_nm'))
+if($config->{'posix_nm'})
 {
   require FFI::ExtractSymbols::PosixNm;
 }
-elsif(FFI::ExtractSymbols::ConfigData->config('openbsd_nm'))
+elsif($config->{'openbsd_nm'})
 {
   require FFI::ExtractSymbols::OpenBSD;
 }
-elsif(FFI::ExtractSymbols::ConfigData->config('ms_windows'))
+elsif($config->{'ms_windows'})
 {
   require FFI::ExtractSymbols::Windows;
 }

@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More tests => 1;
 use File::ShareDir::Dist::Install qw( install_config_get );
-use FFI::ExtractSymbols::ConfigData;
 
 diag '';
 diag '';

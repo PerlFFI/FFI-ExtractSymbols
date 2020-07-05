@@ -21,7 +21,7 @@ if($config->{'posix_nm'})
   my $lib = find_lib lib => 'test', symbol => 'my_function', libpath => 't/ffi';
   die "unable to find libtest!" unless defined $lib;
 
-  my $nm = $config->{nm};
+  my $nm = $config->{exe}->{nm};
 
   my @lines = `$nm -g -P $lib`;
 
