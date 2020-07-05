@@ -4,16 +4,18 @@ Extract symbol names from a shared object or DLL
 
 # SYNOPSIS
 
-    use FFI::ExtractSymbols;
-    use FFI::CheckLib;
-    
-    my $libpath = find_lib( lib => 'foo' );
-    
-    extract_symbols($libpath,
-      code => sub {
-        print "found a function called $_[0]\n";
-      },
-    );
+```perl
+use FFI::ExtractSymbols;
+use FFI::CheckLib;
+
+my $libpath = find_lib( lib => 'foo' );
+
+extract_symbols($libpath,
+  code => sub {
+    print "found a function called $_[0]\n";
+  },
+);
+```
 
 # DESCRIPTION
 
@@ -24,11 +26,13 @@ method used depends on the platform.
 
 ## extract\_symbols
 
-    extract_symbols($lib,
-      export => sub { ... },
-      code   => sub { ... },
-      data   => sub { ... },
-    );
+```perl
+extract_symbols($lib,
+  export => sub { ... },
+  code   => sub { ... },
+  data   => sub { ... },
+);
+```
 
 Extracts symbols from the dynamic library (DLL on Windows, shared 
 library most other places) from the library and calls the given 
@@ -40,13 +44,15 @@ exact symbol name as it was extracted from the DLL or shared library.
 On some platforms this will be prefixed by an underscore.  Some tools, 
 such as `c++filt` will require this version as input.  Example:
 
-    extract_symbols( 'libfoo.so',
-      export => sub {
-        my($symbol1, $symbol2) = @_;
-        my $address   = $ffi->find_symbol($symbol1);
-        my $demangled = `c++filt $symbol2`;
-      },
-    );
+```perl
+extract_symbols( 'libfoo.so',
+  export => sub {
+    my($symbol1, $symbol2) = @_;
+    my $address   = $ffi->find_symbol($symbol1);
+    my $demangled = `c++filt $symbol2`;
+  },
+);
+```
 
 - export
 
