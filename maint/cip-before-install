@@ -3,5 +3,5 @@
 set -ex
 
 cip sudo apt-get update
-cip sudo apt-get install libffi-dev
+cip sudo apt-get install libffi-dev g++
 
