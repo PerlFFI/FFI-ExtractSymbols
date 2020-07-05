@@ -2,8 +2,10 @@ package FFI::ExtractSymbols::Windows;
 
 use strict;
 use warnings;
-use FFI::ExtractSymbols::ConfigData;
+use File::ShareDir::Dist ();
 use File::Which qw( which );
+
+my $config = File::ShareDir::Dist::dist_config('FFI-ExtractSymbols');
 
 # ABSTRACT: Windows (and Cygwin) implementation for FFI::ExtractSymbols
 # VERSION
@@ -28,7 +30,7 @@ instead.
 return 1 if FFI::ExtractSymbols->can('extract_symbols') || $^O !~ /^(MSWin32|cygwin)$/;
 
 my $dumpbin = which('dumpbin');
-$dumpbin ||= FFI::ExtractSymbols::ConfigData->config('exe')->{dumpbin};
+$dumpbin ||= $config->{'exe'}->{dumpbin};
 
 if($dumpbin)
 {

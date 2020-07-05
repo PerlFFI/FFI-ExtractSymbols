@@ -14,8 +14,8 @@ $modules{$_} = $_ for qw(
   ExtUtils::MakeMaker
   FFI::Build
   FFI::CheckLib
-  FFI::ExtractSymbols::ConfigData
   FFI::Platypus
+  File::ShareDir::Dist
   File::ShareDir::Dist::Install
   File::Which
   Test::More

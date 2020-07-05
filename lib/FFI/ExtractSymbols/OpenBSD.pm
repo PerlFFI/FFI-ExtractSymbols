@@ -3,8 +3,11 @@ package FFI::ExtractSymbols::OpenBSD;
 use strict;
 use warnings;
 use File::Which qw( which );
+use File::ShareDir::Dist::Install;
 use constant _function_code => 'T';
 use constant _data_code     => 'B';
+
+my $config = File::ShareDir::Dist::dist_config('FFI-ExtractSymbols');
 
 # ABSTRACT: OpenBSD nm implementation for FFI::ExtractSymbols
 # VERSION
@@ -29,7 +32,7 @@ instead.
 return 1 if FFI::ExtractSymbols->can('extract_symbols') || $^O ne 'openbsd';
 
 my $nm = which('nm');
-$nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
+$nm = $config->{'exe'}->{nm}
   unless defined $nm;
 
 *FFI::ExtractSymbols::extract_symbols = sub

@@ -3,11 +3,10 @@ package FFI::ExtractSymbols::PosixNm;
 use strict;
 use warnings;
 use File::Which qw( which );
-use FFI::ExtractSymbols::ConfigData;
-use constant _function_code =>
-  FFI::ExtractSymbols::ConfigData->config('function_code');
-use constant _data_code =>
-  FFI::ExtractSymbols::ConfigData->config('data_code');
+use File::ShareDir::Dist ();
+use constant ();
+
+my $config = File::ShareDir::Dist::dist_config('FFI-ExtractSymbols');
 
 # ABSTRACT: Posix nm implementation for FFI::ExtractSymbols
 # VERSION
@@ -32,10 +31,10 @@ instead.
 return 1 if FFI::ExtractSymbols->can('extract_symbols');
 
 my $nm = which('nm');
-$nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
+$nm = $config->{'exe'}->{nm}
   unless defined $nm;
 
-if(my $prefix = FFI::ExtractSymbols::ConfigData->config('function_prefix'))
+if(my $prefix = $config->{'function_prefix'})
 {
   my $re = qr{^$prefix};
   *_remove_code_prefix = sub {
@@ -47,7 +46,7 @@ if(my $prefix = FFI::ExtractSymbols::ConfigData->config('function_prefix'))
 else
 { *_remove_code_prefix = sub { $_[0] } }
 
-if(my $prefix = FFI::ExtractSymbols::ConfigData->config('data_prefix'))
+if(my $prefix = $config->{'data_prefix'})
 {
   my $re = qr{^$prefix};
   *_remove_data_prefix = sub {
@@ -69,12 +68,12 @@ else
   {
     next if $line =~ /^\s/;
     my($symbol, $type) = split /\s+/, $line;
-    if($type eq _function_code || $type eq 'W')
+    if($type eq $config->{function_code} || $type eq 'W')
     {
       $callbacks{export}->(_remove_code_prefix($symbol), $symbol);
       $callbacks{code}->  (_remove_code_prefix($symbol), $symbol);
     }
-    elsif($type eq _data_code)
+    elsif($type eq $config->{data_code})
     {
       $callbacks{export}->(_remove_data_prefix($symbol), $symbol);
       $callbacks{data}->  (_remove_data_prefix($symbol), $symbol);
