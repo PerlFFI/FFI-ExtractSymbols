@@ -11,11 +11,13 @@ my $post_diag;
 
 $modules{$_} = $_ for qw(
   Exporter
+  ExtUtils::MakeMaker
+  FFI::Build
   FFI::CheckLib
+  FFI::ExtractSymbols::ConfigData
   FFI::Platypus
+  File::ShareDir::Dist::Install
   File::Which
-  Module::Build
-  Module::Build::FFI
   Test::More
 );
 
