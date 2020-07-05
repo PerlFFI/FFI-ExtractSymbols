@@ -62,9 +62,9 @@ else
 *FFI::ExtractSymbols::extract_symbols = sub
 {
   my($libpath, %callbacks) = @_;
-  
+
   $callbacks{$_} ||= sub {} for qw( export code data );
-  
+
   foreach my $line (`$nm -g -P $libpath`)
   {
     next if $line =~ /^\s/;
@@ -77,7 +77,7 @@ else
     elsif($type eq _data_code)
     {
       $callbacks{export}->(_remove_data_prefix($symbol), $symbol);
-      $callbacks{data}->  (_remove_data_prefix($symbol), $symbol);      
+      $callbacks{data}->  (_remove_data_prefix($symbol), $symbol);
     }
   }
   ();

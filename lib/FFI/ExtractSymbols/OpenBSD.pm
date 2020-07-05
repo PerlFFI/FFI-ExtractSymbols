@@ -35,9 +35,9 @@ $nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
 *FFI::ExtractSymbols::extract_symbols = sub
 {
   my($libpath, %callbacks) = @_;
-  
+
   $callbacks{$_} ||= sub {} for qw( export code data );
-  
+
   foreach my $line (`$nm -g $libpath`)
   {
     next if $line =~ /^\s/;
@@ -50,7 +50,7 @@ $nm = FFI::ExtractSymbols::ConfigData->config('exe')->{nm}
     elsif($type eq _data_code)
     {
       $callbacks{export}->($symbol, $symbol);
-      $callbacks{data}->  ($symbol, $symbol);      
+      $callbacks{data}->  ($symbol, $symbol);
     }
   }
   ();

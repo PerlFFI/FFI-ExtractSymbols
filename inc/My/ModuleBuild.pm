@@ -9,11 +9,11 @@ use base qw( Module::Build::FFI );
 sub new
 {
   my($class, %args) = @_;
-  
+
   $args{ffi_libtest_optional} = 0;
-  
+
   my $self = $class->SUPER::new(%args);
- 
+
   my $exe = {};
   foreach my $name (qw( nm objdump dumpbin readelf ))
   {
@@ -24,9 +24,9 @@ sub new
       $exe->{$name} = $try if -e $try;
     }
   }
-  
+
   $self->config_data( exe => $exe );
-  
+
   if($^O =~ /^(cygwin|MSWin32)$/)
   {
     unless(defined $exe->{dumpbin})
@@ -49,29 +49,29 @@ sub new
     }
     else
     {
-      # we assume that everyone else is going to support 
+      # we assume that everyone else is going to support
       # nm -g -P foo.so
       # although I have no way of testing AIX, HP-UX
       $self->config_data( 'posix_nm' => 1 );
     }
   }
-  
+
   $self;
 }
 
 sub ACTION_probe_libtest
 {
   my($self) = shift;
-  
+
   if($self->config_data('posix_nm'))
   {
 
     $self->depends_on('libtest');
     my $lib = find_lib lib => 'test', symbol => 'my_function', libpath => 'libtest';
     die "unable to find libtest!" unless defined $lib;
-    
+
     my $nm = $self->config_data('exe')->{nm};
-    
+
     my @lines = `$nm -g -P $lib`;
 
     my $function = '';

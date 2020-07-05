@@ -35,7 +35,7 @@ if($dumpbin)
   # convert path to dumpbin to a spaceless version if it has
   # spaces
   $dumpbin = Win32::GetShortPathName($dumpbin) if $dumpbin =~ /\s/;
-  
+
   # use forward slashes
   $dumpbin =~ s{\\}{/}g;
 
@@ -49,17 +49,17 @@ if($dumpbin)
   {
     my($libpath, %callbacks) = @_;
     $callbacks{$_} ||= sub {} for qw( export code data );
-    
+
     # dumpbin requires a Windows path, not a POSIX one if you
     # are running under cygwin
     $libpath = Cygwin::posix_to_win_path($libpath) if $^O eq 'cygwin';
-    
+
     # convert path to library to a spaceless version if it has spaces
     $libpath = Win32::GetShortPathName($libpath) if $libpath =~ /\s/;
-    
+
     # use forward slashes
     $libpath =~ s{\\}{/}g;
-    
+
     foreach my $line (`$dumpbin /exports $libpath`)
     {
       # we do not differentiate between code and data
@@ -71,7 +71,7 @@ if($dumpbin)
         $callbacks{code}  ->($symbol, $symbol);
       }
     }
-    
+
     ();
   };
 }
