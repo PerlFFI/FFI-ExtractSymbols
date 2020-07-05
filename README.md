@@ -1,4 +1,4 @@
-# FFI::ExtractSymbols
+# FFI::ExtractSymbols [![Build Status](https://travis-ci.org/plicease/FFI-ExtractSymbols.svg)](http://travis-ci.org/plicease/FFI-ExtractSymbols)
 
 Extract symbol names from a shared object or DLL
 
