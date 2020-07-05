@@ -1,4 +1,4 @@
-# FFI::ExtractSymbols [![Build Status](https://travis-ci.org/plicease/FFI-ExtractSymbols.svg)](http://travis-ci.org/plicease/FFI-ExtractSymbols)
+# FFI::ExtractSymbols [![Build Status](https://travis-ci.org/PerlFFI/FFI-ExtractSymbols.svg)](http://travis-ci.org/PerlFFI/FFI-ExtractSymbols)
 
 Extract symbol names from a shared object or DLL
 
@@ -19,7 +19,7 @@ extract_symbols($libpath,
 
 # DESCRIPTION
 
-This module extracts the symbol names from a DLL or shared object.  The 
+This module extracts the symbol names from a DLL or shared object.  The
 method used depends on the platform.
 
 # FUNCTIONS
@@ -34,14 +34,14 @@ extract_symbols($lib,
 );
 ```
 
-Extracts symbols from the dynamic library (DLL on Windows, shared 
-library most other places) from the library and calls the given 
-callbacks. Each callback is called once for each symbol that matches 
-that type.  Each callback gets two arguments.  The first is the symbol 
-name in a form that can be passed into [FFI::Platypus#find\_symbol](https://metacpan.org/pod/FFI::Platypus#find_symbol), 
-[FFI::Platypus#function](https://metacpan.org/pod/FFI::Platypus#function) or [FFI::Platypus#attach](https://metacpan.org/pod/FFI::Platypus#attach).  The second is the 
-exact symbol name as it was extracted from the DLL or shared library.  
-On some platforms this will be prefixed by an underscore.  Some tools, 
+Extracts symbols from the dynamic library (DLL on Windows, shared
+library most other places) from the library and calls the given
+callbacks. Each callback is called once for each symbol that matches
+that type.  Each callback gets two arguments.  The first is the symbol
+name in a form that can be passed into [FFI::Platypus#find\_symbol](https://metacpan.org/pod/FFI::Platypus#find_symbol),
+[FFI::Platypus#function](https://metacpan.org/pod/FFI::Platypus#function) or [FFI::Platypus#attach](https://metacpan.org/pod/FFI::Platypus#attach).  The second is the
+exact symbol name as it was extracted from the DLL or shared library.
+On some platforms this will be prefixed by an underscore.  Some tools,
 such as `c++filt` will require this version as input.  Example:
 
 ```perl
@@ -69,15 +69,15 @@ extract_symbols( 'libfoo.so',
 
 # CAVEATS
 
-This module _may_ work on static libraries and object files for some 
+This module _may_ work on static libraries and object files for some
 platforms, but that usage is unsupported and may not be portable.
 
 On windows, depending on the implementation available, this module may
 not differentiate between code and data symbols.  In that case the
 export and code callbacks will be called for both.
 
-On many platforms extra symbols get lumped into DLLs and shared object 
-files so you should account for and ignore getting unexpected symbols 
+On many platforms extra symbols get lumped into DLLs and shared object
+files so you should account for and ignore getting unexpected symbols
 that you probably don't care about.
 
 # SEE ALSO
@@ -92,10 +92,10 @@ that you probably don't care about.
 
 - [Parse::nm](https://metacpan.org/pod/Parse::nm)
 
-    This module can parse the symbol names out of shared object files on 
+    This module can parse the symbol names out of shared object files on
     platforms where `nm` works on those types of files.
 
-    It does not work for Windows DLL files.  It also depends on 
+    It does not work for Windows DLL files.  It also depends on
     [Regexp::Assemble](https://metacpan.org/pod/Regexp::Assemble) which appears to be unmaintained.
 
 # AUTHOR
