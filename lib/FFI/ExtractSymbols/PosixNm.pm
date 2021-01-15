@@ -64,7 +64,7 @@ else
 
   $callbacks{$_} ||= sub {} for qw( export code data );
 
-  foreach my $line (`$nm -g -P $libpath`)
+  foreach my $line (`$nm -g -P -D $libpath`)
   {
     next if $line =~ /^\s/;
     my($symbol, $type) = split /\s+/, $line;
