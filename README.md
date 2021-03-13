@@ -1,4 +1,4 @@
-# FFI::ExtractSymbols [![Build Status](https://travis-ci.org/PerlFFI/FFI-ExtractSymbols.svg)](http://travis-ci.org/PerlFFI/FFI-ExtractSymbols)
+# FFI::ExtractSymbols ![linux](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/linux/badge.svg)
 
 Extract symbol names from a shared object or DLL
 
