@@ -1,4 +1,4 @@
-# FFI::ExtractSymbols ![linux](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/linux/badge.svg)
+# FFI::ExtractSymbols ![linux](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/linux/badge.svg) ![macos](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/macos/badge.svg) ![windows](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/windows/badge.svg) ![cygwin](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/msys2-mingw/badge.svg)
 
 Extract symbol names from a shared object or DLL
 
