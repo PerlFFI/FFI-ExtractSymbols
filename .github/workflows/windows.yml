@@ -58,6 +58,7 @@ jobs:
       - name: Install Static Dependencies
         run: |
           cpanm -n Dist::Zilla
+          cpanm -n App::dumpbin
           dzil authordeps --missing | cpanm -n
           dzil listdeps --missing   | cpanm -n
 

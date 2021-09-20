@@ -66,6 +66,7 @@ jobs:
         run: |
           export PATH="/c/cx/bin:$PATH"
           yes | cpan App::cpanminus || true
+          cpanm -n App::dumpbin
           cpanm -n Dist::Zilla
           perl -S dzil authordeps --missing | perl -S cpanm -n
           perl -S dzil listdeps --missing   | perl -S cpanm -n
