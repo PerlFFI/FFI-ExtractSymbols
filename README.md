@@ -100,7 +100,11 @@ that you probably don't care about.
 
 # AUTHOR
 
-Graham Ollis <plicease@cpan.org>
+Author: Graham Ollis <plicease@cpan.org>
+
+Contributors:
+
+Sanko Robinson (SANKO)
 
 # COPYRIGHT AND LICENSE
 
