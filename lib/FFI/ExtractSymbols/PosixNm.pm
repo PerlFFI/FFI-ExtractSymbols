@@ -64,7 +64,10 @@ else
 
   $callbacks{$_} ||= sub {} for qw( export code data );
 
-  foreach my $line (`$nm -g -P -D $libpath`)
+  my @flags = qw( -g -P );
+  push @flags, '-D' unless $^O eq 'darwin';
+
+  foreach my $line (`$nm @flags $libpath`)
   {
     next if $line =~ /^\s/;
     my($symbol, $type) = split /\s+/, $line;
