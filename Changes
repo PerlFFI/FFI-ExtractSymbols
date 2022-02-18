@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Don't use -D on macOS (gh#14)
 
 0.06      2021-09-21 14:47:12 -0600
   - Parse Windows DLL using internal Pure-Perl implementation instead of
