@@ -1,4 +1,4 @@
-# FFI::ExtractSymbols ![linux](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/linux/badge.svg) ![windows](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/windows/badge.svg) ![cygwin](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/msys2-mingw/badge.svg)
+# FFI::ExtractSymbols ![linux](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/linux/badge.svg) ![windows](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/PerlFFI/FFI-ExtractSymbols/workflows/msys2-mingw/badge.svg)
 
 Extract symbol names from a shared object or DLL
 
@@ -108,7 +108,7 @@ Sanko Robinson (SANKO)
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Graham Ollis.
+This software is copyright (c) 2015-2024 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
